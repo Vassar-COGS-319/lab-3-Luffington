@@ -11,6 +11,10 @@
 
 random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
   
+  
+  
+  
+  
   output <- data.frame(
     correct = accuracy.array,
     rt = rt.array
