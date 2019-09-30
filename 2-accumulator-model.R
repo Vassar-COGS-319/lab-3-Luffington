@@ -1,6 +1,6 @@
 # implement the model by filling in the function below
 # the model should return a data frame with two columns: correct and rt
-# the correct column should be TRUE or FALSE, and rt should contain the
+# the correct comlumn should be TRUE or FALSE, and rt should contain the
 # number of steps it took to reach the criterion.
 
 # note that the function takes four arguments:
@@ -14,14 +14,36 @@
 # so faster rates mean that less evidence is likely to accumulate on each step. we could make
 # these parameters more intuitive by taking 1/rate.1 and 1/rate.2 as the values to rexp().
 
-accumulator.model <- function(samples, rate.1=40, rate.2=40, criterion=3){
-  
 
+#We want a function that takes four arguments and returns a data frame with two columns. 
+
+accumulator.model <- function(samples, rate.1=40, rate.2=40, criterion=3){
+  ##established a counter to keep track of the iterations
+
+  iterations <- 0
+  #accumulators to store the random values sampled from the exponental distribution
+  evidence.accumulator(rate.1) <- 0
+  evidence.accumulator(rate.2) <- 0
+  #start a while loop that terminates when the threshold value is reaached
+  while(evidence.accumulator < criterion){
+  #sampling random values from an exponential distribution of the rates we set in the accumulator function
+  random_values <- sample(rexp(rate.1, rate.2))
+  #add the sampled value from each rate to the evidence accumulators using the sum function
+  sum(evidence.accumulator(rate.1), random_values)
+  sum(evidence.accumulator(rate.2), random_values)
+  #add one to the iterations counter so we can see how many cycles it takes to reach the criterion value
+  sum(iterations, 1)
+  else
+    return(output)
+  print(iterations)
+  
+rt <- iterations
+correct <- c(evidence.accumulator(rate.1), evidence.accumulator(rate2))
   output <- data.frame(
     correct = accuracy.array,
     rt = rt.array
   )
-  
+  }
   return(output)
 }
 
