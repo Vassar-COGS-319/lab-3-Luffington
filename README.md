@@ -21,6 +21,9 @@ Farrell & Lewandowsky describe how to construct one variant of a sequential samp
 4. Repeat steps 2 & 3 until the evidence signal is greater than `criterion` or less than `-criterion`.
 5. Report the number of samples it took to reach the threshold. 
 
+
+
+
 If the model reaches `criterion` then it has responded correctly. If it reaches `-criterion` it has responded incorrectly. The number of samples it takes to reach the threshold is the number of milliseconds it took to respond. (So the model assumes that one sample is taken every millisecond.)
 
 Steps 1-5 can be repeated many times to generate a distribution of responses. 
