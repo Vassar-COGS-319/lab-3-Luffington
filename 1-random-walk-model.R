@@ -10,11 +10,30 @@
 # criterion is the threshold for a response (default value is 3)
 
 random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
+
   
   
-  
-  
-  
+#set a threshold value
+  drift <- 0
+  sdrw <- 0.3
+  criterion <- 3
+  internal_evidence_interval <- 0
+  #sample a null distribution and assign to new tag
+  compare.to.criterion <- sample(rnorm(drift, sdrw))
+  #if the compare.to.criterion value is less than the criterion, we want the function to continue running,
+  #so we check them against each other
+  while ((compare.to.criterion < criterion)||(compare.to.criterion > -criterion)){
+  #add the value to the internal evidence interval 
+  compare.to.criterion <- sum(z, internal.evidence.interval)
+  #this keeps track of how many interations we've run through up to this point
+  sum(internal_evidence_interval, 1)
+  #If our compare value exceeds the criterion,m we want to break out of the while loop and return 
+  #the number of trials it took to get here
+  else 
+    return(internal_evidence_interval)
+    
+  }
+  #not sure how to incorporate this piece of the function, must be critical
   output <- data.frame(
     correct = accuracy.array,
     rt = rt.array
