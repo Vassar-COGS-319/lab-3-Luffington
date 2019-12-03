@@ -20,6 +20,41 @@
 accumulator.model <- function(samples, rate.1=40, rate.2=40, criterion=3){
   ##established a counter to keep track of the iterations
 
+  accuracy.array <- numeric()
+  rt.array <- numeric()
+  
+  for(i in 1:samples){
+    evidence.1 <- 0
+    evidence.2 <- 0
+    rt <- 0
+    while(evidence.1 < criterion && evidence.2 < criterion){
+      evidence.1 <- evidence.1 + rexp(1, rate.1)
+      evidence.2 <- evidence.2 +rexp(1, rate.2)
+      rt <- rt + 1
+    }
+    rt.array[i] <- rt
+    accuracy.array[i] <- (evidence.1 > evidence.2)
+  }
+  
+  output <- data.frame(
+    correct = accuracy.array,
+    rt = rt.array
+  )
+  return(output)
+  
+    
+  }
+  
+  
+  
+  
+  
+  
+  ##NON-FUNCTIONAL CODE BEGINS HERE
+  
+  
+  
+  
   iterations <- 0
   #accumulators to store the random values sampled from the exponental distribution
   evidence.accumulator(rate.1) <- 0
@@ -46,6 +81,9 @@ correct <- c(evidence.accumulator(rate.1), evidence.accumulator(rate2))
   }
   return(output)
 }
+
+##BACK TO NORMALCY
+
 
 # test the model ####
 

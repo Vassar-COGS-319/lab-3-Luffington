@@ -14,6 +14,20 @@
 
 # You don't need to get a perfect match. Just get in the ballpark. 
 
+set.seed(12604)
+
+rw.model.result <- random.walk.model(1000, drift=0.012, sdrw=0.3, criterion = 4.8)
+rw.model.result %>% group_by(correct) %>% summarize(mean.rt = mean(rt))
+mean(rw.model.result$correct)
+
+acc.model.result <- accumulator.model(1000, rate.1 = 85, rate.2 = 91, criterion = 3)
+acc.model.result %>% group_by(correct) %>% summarize(mean.rt = mean(rt))
+mean(acc.model.result$correct)
+
+
+
+#NON-FUNCTIONAL CODE BEGINS HERE
+
 
 #random-walk-model code(edited):
 
@@ -81,10 +95,11 @@ accumulator.model <- function(samples, rate.1=250, rate.2=246, criterion=0.8){
   return(output)
 }
 
-#Number of trails edited for the same reasons as in the model above
+#Number of trials edited for the same reasons as in the model above
 initial.test <- accumulator.model(iterations)
 sum(initial.test$correct) / length(initial.test$correct) # should be close to 0.5
 mean(initial.test$rt) # should be about 112
+#END NON-FUNCTIONAL CODE
 
 
 # Can both models do a reasonable job of accounting for the mean RT and accuracy? Report the

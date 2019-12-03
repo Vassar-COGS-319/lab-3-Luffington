@@ -10,8 +10,31 @@
 # criterion is the threshold for a response (default value is 3)
 
 random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
-
+  accuracy.array <- numeric()
+  rt.array <- numeric()
+  ##
+  for(i in 1:sample){
+    evidence <- 0
+    rt <- 0
+    while(abs(evidence) < criterion){
+      evidence <- evidence + rnorm(1, drift, sdrw)
+      rt <- rt + 1
+    }
+    rt.array[i] <- rt
+    accuracy.array[i] <- (evidence > criterion)
+  }
   
+  output <- data.frame(
+    correct = accuracy.array
+    rt = rt.array
+  )
+  
+  return(output)
+  
+}
+ 
+
+  ##NONE OF THIS IS FUNCTIONAL
   
 #set a threshold value
   drift <- 0
@@ -34,6 +57,7 @@ random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
     
   }
   #not sure how to incorporate this piece of the function, must be critical
+  
   output <- data.frame(
     correct = accuracy.array,
     rt = rt.array
@@ -41,6 +65,9 @@ random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
   
   return(output)
 }
+
+## BACK TO FUNCTIONAL CODE
+
 
 # test the model ####
 
