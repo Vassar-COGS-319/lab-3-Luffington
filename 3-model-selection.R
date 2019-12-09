@@ -99,6 +99,7 @@ accumulator.model <- function(samples, rate.1=250, rate.2=246, criterion=0.8){
 initial.test <- accumulator.model(iterations)
 sum(initial.test$correct) / length(initial.test$correct) # should be close to 0.5
 mean(initial.test$rt) # should be about 112
+
 #END NON-FUNCTIONAL CODE
 
 
@@ -110,3 +111,19 @@ mean(initial.test$rt) # should be about 112
 # predicted by each model. Based on these distributions, what kind of information could
 # we use to evaluate which model is a better descriptor of the data for the experiment?
 # Describe briefly how you might make this evaluation.
+
+layout(matrix(1:4, nrow=2, byrow=T))
+hist((rw.model.result %>% filter(correct==TRUE))$rt, breaks=seq(0, 2000, 100), main="RW Model, correct", xlab="RT")
+hist((rw.model.result %>% filter(correct==FALSE))$rt, breaks=seq(0, 2000, 100), main="RW Model, incorrect", xlab="RT")
+hist((acc.model.result %>% filter(correct==TRUE))$rt, breaks=seq(0, 2000, 10), main="ACC Model, correct", xlab="RT")
+hist((acc.model.result %>% filter(correct==FALSE))$rt, breaks=seq(0, 2000, 10), main="ACC Model, incorrect", xlab="RT")
+
+
+
+
+
+
+rw.model.result %>% group_by(correct) %>% summarize(SD.rt = sd(rt))
+acc.model.result %>% group_by(correct) %>% summarize(sd.rt = sd(rt))
+
+
