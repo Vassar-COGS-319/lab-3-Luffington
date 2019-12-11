@@ -100,11 +100,19 @@ initial.test <- accumulator.model(iterations)
 sum(initial.test$correct) / length(initial.test$correct) # should be close to 0.5
 mean(initial.test$rt) # should be about 112
 
-#END NON-FUNCTIONAL CODE
+##I wildly overcomplicated this lab the first few times I attempted it
+
+##END NON-FUNCTIONAL CODE
 
 
 # Can both models do a reasonable job of accounting for the mean RT and accuracy? Report the
 # results of your efforts:
+
+##My random walk model returned values of 255 and 256 for mean.rt with parameters set so 
+#that drift=0.012 and criterion=4.8, which is an accuracy of 77.2%. 
+##My accumulator model returned values of 259 and 251 for mean.rt with parameters set so 
+#rate.1=85 and rate.2=91, which gives an accuracy of 76.8%. 
+
 
 
 # Using the parameters that you found above, plot histograms of the distribution of RTs
@@ -118,8 +126,9 @@ hist((rw.model.result %>% filter(correct==FALSE))$rt, breaks=seq(0, 2000, 100), 
 hist((acc.model.result %>% filter(correct==TRUE))$rt, breaks=seq(0, 2000, 10), main="ACC Model, correct", xlab="RT")
 hist((acc.model.result %>% filter(correct==FALSE))$rt, breaks=seq(0, 2000, 10), main="ACC Model, incorrect", xlab="RT")
 
-
-
+##The random walk model returns very skewed distributions of RT
+##whereas the accumulator model returned pretty symmetric distributions. 
+##additionally, there is much more variability in the random walk histograms
 
 
 

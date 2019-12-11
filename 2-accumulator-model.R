@@ -20,21 +20,26 @@
 accumulator.model <- function(samples, rate.1=40, rate.2=40, criterion=3){
   ##established a counter to keep track of the iterations
 
+  ##accuracy and response time set to blank numeric arrays
   accuracy.array <- numeric()
   rt.array <- numeric()
-  
+  ##for loop to iterate through input number of samples
   for(i in 1:samples){
+    ##evidence and response time set to 0
     evidence.1 <- 0
     evidence.2 <- 0
     rt <- 0
+    ##while loop holds condition for evidence to exceed respective criterion
     while(evidence.1 < criterion && evidence.2 < criterion){
       evidence.1 <- evidence.1 + rexp(1, rate.1)
       evidence.2 <- evidence.2 +rexp(1, rate.2)
+      ##adding more to rt
       rt <- rt + 1
     }
     rt.array[i] <- rt
     accuracy.array[i] <- (evidence.1 > evidence.2)
   }
+  #Returning dataframe with both collected arrays
   
   output <- data.frame(
     correct = accuracy.array,
@@ -53,7 +58,8 @@ accumulator.model <- function(samples, rate.1=40, rate.2=40, criterion=3){
   ##NON-FUNCTIONAL CODE BEGINS HERE
   
   
-  
+  ##As before, with this code, my methodology for tackling the problem was scattered
+##and not focused around function syntax
   
   iterations <- 0
   #accumulators to store the random values sampled from the exponental distribution

@@ -10,31 +10,37 @@
 # criterion is the threshold for a response (default value is 3)
 
 random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
+  #Setting accuracy array to a blank array
   accuracy.array <- numeric()
+  #Same for rt.array
   rt.array <- numeric()
-  ##
-  for(i in 1:sample){
+  ## for loop that recurs through the input 'samples'
+  for(i in 1:samples){
     evidence <- 0
     rt <- 0
-    while(abs(evidence) < criterion){
+    while(abs(evidence) < criterion){ 
+      #While the difference of the evidence is less than criterion
       evidence <- evidence + rnorm(1, drift, sdrw)
+      #sum evidence with normal distribution
       rt <- rt + 1
+      #Reaction time increases by 1
     }
     rt.array[i] <- rt
     accuracy.array[i] <- (evidence > criterion)
   }
   
   output <- data.frame(
-    correct = accuracy.array
+    correct = accuracy.array,
     rt = rt.array
   )
-  
   return(output)
   
 }
  
 
   ##NONE OF THIS IS FUNCTIONAL
+##I went wrong with this code by having a fundamental misunderstanding about how to syntax
+##a function. I left this here to remind myself how I originally thought about this problem.
   
 #set a threshold value
   drift <- 0
@@ -56,7 +62,7 @@ random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
     return(internal_evidence_interval)
     
   }
-  #not sure how to incorporate this piece of the function, must be critical
+  #
   
   output <- data.frame(
     correct = accuracy.array,
